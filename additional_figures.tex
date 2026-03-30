@@ -72,7 +72,31 @@
 \FloatBarrier
 
 %% ============================================================
-%% SECTION 2: Downstream classification experiments
+%% SECTION 2: Uniform distribution on the unit sphere
+%% ============================================================
+
+\section{Synthetic experiment: uniform distribution on the unit sphere}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.65\textwidth]{sphere_convergence.png}
+\caption{\textbf{Convergence rate $|\beta|$ versus horizon $H$ for uniform
+  distributions on the unit sphere.}
+  Empirical convergence rate exponents $|\beta_{\mathrm{mean}}|$ and
+  $|\beta_{\mathrm{cov}}|$ as a function of attention horizon $H$ for token
+  embeddings drawn uniformly from the unit sphere $\mathbb{S}^{d-1}$.
+  The grey dashed line indicates the classical rate exponent $|\beta_0| = 0.5$
+  corresponding to the parametric rate $1/\sqrt{n}$.
+  The same slow-down as in the Gaussian case is observed as $H$ increases,
+  confirming that the sub-parametric convergence regime predicted by
+  Theorem~5.3 extends beyond Gaussian distributions.}
+\label{fig:sphere}
+\end{figure}
+
+\FloatBarrier
+
+%% ============================================================
+%% SECTION 3: Downstream classification experiments
 %% ============================================================
 
 \section{Downstream classification experiment}
@@ -120,7 +144,7 @@
 \FloatBarrier
 
 %% ============================================================
-%% SECTION 3: Windowed (non-i.i.d.) sampling experiments
+%% SECTION 4: Windowed (non-i.i.d.) sampling experiments
 %% ============================================================
 
 \section{Windowed sampling experiment}
