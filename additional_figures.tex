@@ -38,7 +38,7 @@
   Larger $|\beta|$ implies faster convergence.
   The convergence rate $|\beta|$ is estimated via log-log linear regression of
   the per-token mean (left) or covariance (right) error against $n$, with
-  $n \in [1000, 3000]$ i.i.d.\ sampled keys and $k = 500$ Monte Carlo
+  $n \in [1000, 5000]$ i.i.d.\ sampled keys and $k \in [500, 1000]$ Monte Carlo
   repetitions. Star markers denote the configurations whose detailed convergence
   curves are displayed in Figure~\ref{fig:bert_convergence}.
   The dashed line is a linear fit across all points.}
@@ -60,7 +60,7 @@
   Mean error (left) and covariance error (right) versus subsample size $n$ for
   the three starred configurations from Figure~\ref{fig:bert_slope}, using
   BERT-base-uncased (dense attention).
-  Markers show the averaged $\ell_2$ errors over $k=500$ subsamples,
+  Markers show the averaged $\ell_2$ errors over $k=500$--$1000$ subsamples,
   with $\pm 3$ standard-error bands.
   Log--log linear fits yield power-law exponents $|\beta|$ (legend), with error
   scaling as $n^{-|\beta|}$.
@@ -135,13 +135,13 @@
 \centering
 \includegraphics[width=0.65\textwidth]{downstream_task_end_to_end_errors.pdf}
 \caption{\textbf{End-to-end error convergence versus number of keys per query $n$.}
-  BigBird-RoBERTa-base fine-tuned for $3$ epochs with mean pooling on the
-  arxiv-classification task (11 categories, dense accuracy $86.4\%$), where
-  $n$ i.i.d.\ sampled keys per query are used to compute attention at each layer.
-  RMSE ($\beta=0.27$, $R^2=0.999$), pooling error ($\beta=0.30$, $R^2=1.000$)
-  and logit error ($\beta=0.37$, $R^2=0.999$) all follow a sub-parametric
-  power-law regime $n^{-\beta}$ with $\beta < \tfrac{1}{2}$, consistent with
-  Theorem~5.3.}
+  We observe sub-parametric convergence on downstream tasks, with RMSE
+  ($\beta=0.27$), pooling error ($\beta=0.30$) and logit error ($\beta=0.37$)
+  all scaling as $n^{-\beta}$ with $\beta < \tfrac{1}{2}$, consistent with
+  Theorem~5.3. Experiment: BigBird-RoBERTa-base fine-tuned for $3$ epochs with
+  mean pooling on arxiv-classification (11 categories, dense accuracy $86.4\%$),
+  with $n$ i.i.d.\ sampled keys per query used to compute attention at each layer.
+  Dashed lines show power-law fits on $n \leq 884$.}
 \label{fig:downstream_end_to_end}
 \end{figure}
 
@@ -149,11 +149,12 @@
 \centering
 \includegraphics[width=0.65\textwidth]{downstream_task_classification_errors.pdf}
 \caption{\textbf{Normalized error rates versus $n$.}
-  RMSE ($\beta=0.27$), pooling error ($\beta=0.30$), logit error ($\beta=0.37$)
-  and disagreement rate with the dense model ($\beta=0.46$) all exhibit
-  sub-parametric convergence, with downstream metrics converging more rapidly
-  than embedding-level metrics. Shaded bands show $\pm 3$ standard-error
-  intervals.}
+  All downstream error metrics exhibit sub-parametric convergence $n^{-\beta}$
+  with $\beta < \tfrac{1}{2}$: RMSE ($\beta=0.27$), pooling error ($\beta=0.30$),
+  logit error ($\beta=0.37$) and disagreement rate — fraction of examples where
+  sparse and dense predictions differ — ($\beta=0.46$). Downstream metrics
+  converge more rapidly than embedding-level metrics. Shaded bands show
+  $\pm 3$ standard-error intervals.}
 \label{fig:downstream_errors}
 \end{figure}
 
