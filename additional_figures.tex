@@ -72,14 +72,44 @@
 \FloatBarrier
 
 %% ============================================================
-%% SECTION 2: Uniform distribution on the unit sphere
+%% SECTION 2: Windowed (non-i.i.d.) sampling experiments
+%% ============================================================
+
+\section{Windowed sampling experiment}
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{Window_RMSE_slope_vs_H.pdf}
+    \caption{RMSE error}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{Window_COV_slope_vs_H.pdf}
+    \caption{Covariance error}
+\end{subfigure}
+\caption{\textbf{Convergence rate $|\beta|$ versus horizon $H$ under non-i.i.d.\
+  windowed sampling.}
+  BigBird-RoBERTa's layers $0$--$11$ on English Wikipedia, under two sampling
+  strategies: fixed-random (EN window, $r=50$ random tokens outside a sliding
+  window of size $n-r-1$) and hybrid (EN hybrid 50/50, half window and half
+  random tokens). Colors indicate layers. The negative trend (fit slope
+  $R=-0.65$) confirms that the slow-down driven by $H$ persists under structured,
+  non-i.i.d.\ sampling.}
+\label{fig:window}
+\end{figure}
+
+\FloatBarrier
+
+%% ============================================================
+%% SECTION 3: Uniform distribution on the unit sphere
 %% ============================================================
 
 \section{Synthetic experiment: uniform distribution on the unit sphere}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{sphere_convergence.png}
+\includegraphics[width=0.65\textwidth]{sphere_convergence.pdf}
 \caption{\textbf{Convergence rate $|\beta|$ versus horizon $H$ for uniform
   distributions on the unit sphere.}
   Empirical convergence rate exponents $|\beta_{\mathrm{mean}}|$ and
@@ -96,7 +126,7 @@
 \FloatBarrier
 
 %% ============================================================
-%% SECTION 3: Downstream classification experiments
+%% SECTION 4: Downstream classification experiments
 %% ============================================================
 
 \section{Downstream classification experiment}
@@ -106,7 +136,8 @@
 \includegraphics[width=0.65\textwidth]{downstream_task_end_to_end_errors.pdf}
 \caption{\textbf{End-to-end error convergence versus number of keys per query $n$.}
   BigBird-RoBERTa-base fine-tuned for $3$ epochs with mean pooling on the
-  arxiv-classification task (11 categories, dense accuracy $86.4\%$).
+  arxiv-classification task (11 categories, dense accuracy $86.4\%$), where
+  $n$ i.i.d.\ sampled keys per query are used to compute attention at each layer.
   RMSE ($\beta=0.27$, $R^2=0.999$), pooling error ($\beta=0.30$, $R^2=1.000$)
   and logit error ($\beta=0.37$, $R^2=0.999$) all follow a sub-parametric
   power-law regime $n^{-\beta}$ with $\beta < \tfrac{1}{2}$, consistent with
@@ -139,36 +170,6 @@
   doubling the number of keys from $n=1101$ to $n=2124$ yields only a $+0.7\%$
   accuracy gain.}
 \label{fig:downstream_accuracy}
-\end{figure}
-
-\FloatBarrier
-
-%% ============================================================
-%% SECTION 4: Windowed (non-i.i.d.) sampling experiments
-%% ============================================================
-
-\section{Windowed sampling experiment}
-
-\begin{figure}[htbp]
-\centering
-\begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{Window_RMSE_slope_vs_H.pdf}
-    \caption{RMSE error}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{Window_COV_slope_vs_H.pdf}
-    \caption{Covariance error}
-\end{subfigure}
-\caption{\textbf{Convergence rate $|\beta|$ versus horizon $H$ under non-i.i.d.\
-  windowed sampling.}
-  BigBird-RoBERTa's layers $0$--$11$ on English Wikipedia, under two sampling
-  strategies: fixed-random (EN window, $r=50$ random tokens outside a sliding
-  window of size $n-r-1$) and hybrid (EN hybrid 50/50, half window and half
-  random tokens). Colors indicate layers. The negative trend (fit slope
-  $R=-0.65$) confirms that the slow-down driven by $H$ persists under structured,
-  non-i.i.d.\ sampling.}
-\label{fig:window}
 \end{figure}
 
 \FloatBarrier
