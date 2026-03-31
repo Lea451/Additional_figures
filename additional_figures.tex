@@ -38,7 +38,7 @@
   Larger $|\beta|$ implies faster convergence.
   The convergence rate $|\beta|$ is estimated via log-log linear regression of
   the per-token mean (left) or covariance (right) error against $n$, with
-  $n \in [1000, 5000]$ i.i.d.\ sampled keys and $k \in [500, 1000]$ Monte Carlo
+  $n \in [1000, 3000]$ i.i.d.\ sampled keys and $k = 500$ Monte Carlo
   repetitions. Star markers denote the configurations whose detailed convergence
   curves are displayed in Figure~\ref{fig:bert_convergence}.
   The dashed line is a linear fit across all points.}
@@ -60,7 +60,7 @@
   Mean error (left) and covariance error (right) versus subsample size $n$ for
   the three starred configurations from Figure~\ref{fig:bert_slope}, using
   BERT-base-uncased (dense attention).
-  Markers show the averaged $\ell_2$ errors over $k=500$--$1000$ subsamples,
+  Markers show the averaged $\ell_2$ errors over $k=500$ subsamples,
   with $\pm 3$ standard-error bands.
   Log--log linear fits yield power-law exponents $|\beta|$ (legend), with error
   scaling as $n^{-|\beta|}$.
