@@ -23,12 +23,12 @@
 \begin{figure}[htbp]
 \centering
 \begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{BERT_slope_vs_H_stars_mean.pdf}
+    \includegraphics[width=\textwidth]{plots/BERT_slope_vs_H_stars_mean.pdf}
     \caption{Mean error}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{BERT_slope_vs_H_stars_covariance.pdf}
+    \includegraphics[width=\textwidth]{plots/BERT_slope_vs_H_stars_covariance.pdf}
     \caption{Covariance error}
 \end{subfigure}
 \caption{\textbf{Convergence rate $|\beta|$ versus horizon $H$ across
@@ -48,12 +48,12 @@
 \begin{figure}[htbp]
 \centering
 \begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{BERT_convergence_stars_mean.pdf}
+    \includegraphics[width=\textwidth]{plots/BERT_convergence_stars_mean.pdf}
     \caption{Mean error}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{BERT_convergence_stars_covariance.pdf}
+    \includegraphics[width=\textwidth]{plots/BERT_convergence_stars_covariance.pdf}
     \caption{Covariance error}
 \end{subfigure}
 \caption{\textbf{Convergence curves for starred layers.}
@@ -80,12 +80,12 @@
 \begin{figure}[htbp]
 \centering
 \begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{Window_RMSE_slope_vs_H.pdf}
+    \includegraphics[width=\textwidth]{plots/Window_RMSE_slope_vs_H.pdf}
     \caption{RMSE error}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{Window_COV_slope_vs_H.pdf}
+    \includegraphics[width=\textwidth]{plots/Window_COV_slope_vs_H.pdf}
     \caption{Covariance error}
 \end{subfigure}
 \caption{\textbf{Convergence rate $|\beta|$ versus horizon $H$ under non-i.i.d.\
@@ -109,7 +109,7 @@
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{sphere_convergence.pdf}
+\includegraphics[width=0.65\textwidth]{plots/sphere_convergence.pdf}
 \caption{\textbf{Convergence rate $|\beta|$ versus horizon $H$ for uniform
   distributions on the unit sphere.}
   Empirical convergence rate exponents $|\beta_{\mathrm{mean}}|$ and
@@ -133,7 +133,7 @@
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{downstream_task_end_to_end_errors.pdf}
+\includegraphics[width=0.65\textwidth]{plots/downstream_task_end_to_end_errors.pdf}
 \caption{\textbf{End-to-end error convergence versus number of keys per query $n$.}
   We observe sub-parametric convergence on downstream tasks, with RMSE
   ($\beta=0.27$), pooling error ($\beta=0.30$) and logit error ($\beta=0.37$)
@@ -147,12 +147,12 @@
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{downstream_task_classification_errors.pdf}
+\includegraphics[width=0.65\textwidth]{plots/downstream_task_classification_errors.pdf}
 \caption{\textbf{Normalized error rates versus $n$.}
   All downstream error metrics exhibit sub-parametric convergence $n^{-\beta}$
   with $\beta < \tfrac{1}{2}$: RMSE ($\beta=0.27$), pooling error ($\beta=0.30$),
-  logit error ($\beta=0.37$) and disagreement rate — fraction of examples where
-  sparse and dense predictions differ — ($\beta=0.46$). Downstream metrics
+  logit error ($\beta=0.37$) and disagreement rate --- fraction of examples where
+  sparse and dense predictions differ --- ($\beta=0.46$). Downstream metrics
   converge more rapidly than embedding-level metrics. Shaded bands show
   $\pm 3$ standard-error intervals.}
 \label{fig:downstream_errors}
@@ -160,7 +160,7 @@
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{downstream_task_accuracy_agreement.pdf}
+\includegraphics[width=0.65\textwidth]{plots/downstream_task_accuracy_agreement.pdf}
 \caption{\textbf{Classification accuracy and agreement rate versus $n$.}
   Accuracy (fraction of correctly classified examples) and agreement rate with
   the dense model (fraction of examples where the sparse and dense models predict
@@ -171,6 +171,37 @@
   doubling the number of keys from $n=1101$ to $n=2124$ yields only a $+0.7\%$
   accuracy gain.}
 \label{fig:downstream_accuracy}
+\end{figure}
+
+\FloatBarrier
+
+%% ============================================================
+%% SECTION 5: Effective rank of the token covariance matrix
+%% ============================================================
+
+\section{Effective rank of the token covariance matrix per layer}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.65\textwidth]{plots/effective_rank_per_layer.pdf}
+\caption{\textbf{Effective rank $\mathrm{tr}(\Sigma)/\lambda_{\max}(\Sigma)$ of
+  the token covariance matrix at each layer of BigBird-RoBERTa-base, across
+  four corpora.}
+  The effective rank is evaluated on English Wikipedia, Chinese Wikipedia,
+  German Wikipedia, and English news (CC-News), using the same pretrained model
+  weights; differences arise solely from the input distribution.
+  The effective rank decreases with depth across all datasets, reflecting
+  increasing spectral concentration in deeper layers---consistent with the
+  growing influence of $\lambda_{\max}(\Sigma)$ on the convergence constant in
+  Theorem~5.3.
+  Chinese Wikipedia exhibits markedly lower effective rank at every layer
+  ($\sim\!3$--$6$ vs.\ $\sim\!5$--$27$ for the other corpora), reflecting its
+  higher anisotropy and explaining the faster empirical slow-down observed for
+  this distribution.
+  English Wikipedia and English news overlap closely throughout all layers,
+  suggesting that effective rank is primarily language-dependent rather than
+  domain-dependent.}
+\label{fig:effective_rank}
 \end{figure}
 
 \FloatBarrier
