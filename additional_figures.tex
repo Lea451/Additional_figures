@@ -173,12 +173,10 @@
 \label{fig:downstream_accuracy}
 \end{figure}
 
-\FloatBarrier
-
 %% ============================================================
 %% SECTION 5: Effective rank of the token covariance matrix
 %% ============================================================
-
+\newpage
 \section{Effective rank of the token covariance matrix per layer}
 
 \begin{figure}[htbp]
@@ -186,20 +184,17 @@
 \includegraphics[width=0.65\textwidth]{plots/effective_rank_per_layer.pdf}
 \caption{\textbf{Effective rank $\mathrm{tr}(\Sigma)/\lambda_{\max}(\Sigma)$ of
   the token covariance matrix at each layer of BigBird-RoBERTa-base, across
-  four corpora.}
+  four datasets.}
   The effective rank is evaluated on English Wikipedia, Chinese Wikipedia,
   German Wikipedia, and English news (CC-News), using the same pretrained model
   weights; differences arise solely from the input distribution.
-  The effective rank decreases with depth across all datasets, reflecting
-  increasing spectral concentration in deeper layers---consistent with the
-  growing influence of $\lambda_{\max}(\Sigma)$ on the convergence constant in
-  Theorem~5.3.
+  The effective rank decreases with depth across all datasets, indicative of
+  increasing spectral concentration in deeper layers.
   Chinese Wikipedia exhibits markedly lower effective rank at every layer
-  ($\sim\!3$--$6$ vs.\ $\sim\!5$--$27$ for the other corpora), reflecting its
-  higher anisotropy and explaining the faster empirical slow-down observed for
-  this distribution.
+  ($\sim\!3$--$6$ vs.\ $\sim\!5$--$27$ for the other datasets), reflecting its
+  higher anisotropy.
   English Wikipedia and English news overlap closely throughout all layers,
-  suggesting that effective rank is primarily language-dependent rather than
+  suggesting that effective rank might be primarily language-dependent rather than
   domain-dependent.}
 \label{fig:effective_rank}
 \end{figure}
